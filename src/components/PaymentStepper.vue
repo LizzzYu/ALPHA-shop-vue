@@ -45,15 +45,22 @@
 </template>
 
 <script>
-import { paymentStepperConfig } from '../configs/paymentConfigs';
-
 export default {
   name: 'PaymentStepper',
+  props: {
+    currentStep: {
+      type: Number,
+      required: true
+    },
+    paymentSteps: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
-      currentStep: 1,
-      totalSteps: paymentStepperConfig.length,
-      steps: paymentStepperConfig,
+      totalSteps: this.paymentSteps.length,
+      steps: this.paymentSteps,
     };
   },
   methods: {

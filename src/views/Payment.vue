@@ -1,28 +1,33 @@
 <template>
   <div class="payment-wrapper">
-    <PaymentStepper />
+    <PaymentStepper :currentStep="currentStep" :paymentSteps="paymentSteps" />
+    <PaymentShippingAddressForm
+      :stepName="paymentSteps[currentStep - 1].title"
+    />
   </div>
 </template>
 
 <script>
+import { paymentStepperConfig } from '../configs/paymentConfigs';
 import PaymentStepper from '../components/PaymentStepper';
+import PaymentShippingAddressForm from './PaymentShippingAddressForm';
+
 export default {
   name: 'Payment',
   components: {
     PaymentStepper,
+    PaymentShippingAddressForm,
+  },
+  data() {
+    return {
+      currentStep: 1,
+      paymentSteps: paymentStepperConfig,
+    };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-// h3 {
-//   font-family: 'Noto Sans TC';
-//   font-style: normal;
-//   font-weight: 700;
-//   font-size: 24px;
-//   line-height: 24px;
-// }
-
 .payment-wrapper {
   grid-column: 1 / 7;
 }
