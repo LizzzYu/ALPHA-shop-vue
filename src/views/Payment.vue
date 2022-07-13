@@ -1,6 +1,5 @@
 <template>
-  <div>
-    寄送地址
+  <div class="payment-wrapper">
     <PaymentStepper />
   </div>
 </template>
@@ -11,6 +10,20 @@ export default {
   name: 'Payment',
   components: {
     PaymentStepper,
-  }
-}
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+// h3 {
+//   font-family: 'Noto Sans TC';
+//   font-style: normal;
+//   font-weight: 700;
+//   font-size: 24px;
+//   line-height: 24px;
+// }
+
+.payment-wrapper {
+  grid-column: 1 / 7;
+}
+</style>

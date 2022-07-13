@@ -20,19 +20,6 @@ export default {
 </script>
 
 <style lang="scss">
-// @import './scss/_variables.scss';
-// @import './scss/_reset.scss';
-@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
-
-header,
-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  background-color: $gray;
-}
-
 .main-title {
   font-family: 'Noto Sans TC';
   font-style: normal;
@@ -41,22 +28,20 @@ footer {
   line-height: 38px;
 
   padding-top: 80px;
-  padding-bottom: 48px;
 }
 
 #alpha-shop {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  // font-family: 'Noto Sans TC', Avenir, Helvetica, Arial, sans-serif;
+  // font-family: 'Noto Sans TC', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // text-align: center;
   color: #2c3e50;
-  // margin-top: 60px;
 }
 
 .main-wrapper {
   max-width: $max-width;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 12fr;
+  grid-template-columns: repeat(12, 1fr);
 }
 </style>
