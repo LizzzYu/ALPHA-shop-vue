@@ -1,9 +1,11 @@
 <template>
   <div class="payment-wrapper">
-    <PaymentStepper :currentStep="currentStep" :paymentSteps="paymentSteps" />
-    <PaymentShippingAddressForm
-      :stepName="paymentSteps[currentStep - 1].title"
-    />
+    <div>
+      <PaymentStepper :currentStep="currentStep" :paymentSteps="paymentSteps" />
+      <PaymentShippingAddressForm
+        :stepName="paymentSteps[currentStep - 1].title"
+      />
+    </div>
     <PaymentActionButtonRow />
   </div>
 </template>
@@ -12,7 +14,7 @@
 import { paymentStepperConfig } from '../configs/paymentConfigs';
 import PaymentStepper from '../components/PaymentStepper';
 import PaymentShippingAddressForm from './PaymentShippingAddressForm';
-import PaymentActionButtonRow from '../components/PaymentActionButtonRow'
+import PaymentActionButtonRow from '../components/PaymentActionButtonRow';
 
 export default {
   name: 'Payment',
@@ -33,5 +35,10 @@ export default {
 <style lang="scss" scoped>
 .payment-wrapper {
   grid-column: 1 / 7;
+  min-height: 165px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>

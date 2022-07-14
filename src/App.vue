@@ -4,6 +4,7 @@
     <main class="main-wrapper">
       <h1 class="main-title">結帳</h1>
       <Payment />
+      <div class="cart">cart</div>
     </main>
     <footer>fake footer</footer>
   </div>
@@ -20,6 +21,12 @@ export default {
 </script>
 
 <style lang="scss">
+.cart {
+  height: 490px;
+  width: 100%;
+  background-color: $light-gray;
+  grid-column: 8 / 13
+}
 .main-title {
   font-family: 'Noto Sans TC';
   font-style: normal;
@@ -28,6 +35,7 @@ export default {
   line-height: 38px;
 
   padding-top: 80px;
+  padding-bottom: 48px;
 }
 
 #alpha-shop {

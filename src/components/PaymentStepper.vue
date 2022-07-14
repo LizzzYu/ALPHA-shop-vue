@@ -76,7 +76,6 @@ export default {
 
 <style lang="scss" scoped>
 .stepper-wrapper {
-  padding-top: 48px;
   display: grid;
   // grid-template-columns: auto 1fr auto 1fr auto;
   grid-auto-flow: column;
