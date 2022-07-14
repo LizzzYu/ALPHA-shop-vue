@@ -2,11 +2,12 @@
   <div class="payment-wrapper">
     <div>
       <PaymentStepper :currentStep="currentStep" :paymentSteps="paymentSteps" />
+      <h3 class="title">{{ paymentSteps[currentStep - 1].title }}</h3>
       <PaymentShippingAddressForm
         :stepName="paymentSteps[currentStep - 1].title"
       />
     </div>
-    <PaymentActionButtonRow />
+    <PaymentActionButtonRow :totalSteps="paymentSteps.length" />
   </div>
 </template>
 
@@ -25,7 +26,7 @@ export default {
   },
   data() {
     return {
-      currentStep: 2,
+      currentStep: 1,
       paymentSteps: paymentStepperConfig,
     };
   },
@@ -40,5 +41,15 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.title {
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+
+  padding-top: 64px;
 }
 </style>

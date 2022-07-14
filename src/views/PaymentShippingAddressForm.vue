@@ -1,6 +1,6 @@
 <template>
   <form class="form-wrapper">
-    <h3 class="title">{{ stepName }}</h3>
+    <!-- <h3 class="title">{{ stepName }}</h3> -->
     <div class="form-content">
       <div class="form-content__group">
         <label class="form-content__group__title">稱謂</label>
@@ -67,18 +67,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-wrapper {
-  padding-top: 64px;
-}
-
-.title {
-  font-family: 'Noto Sans TC';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 24px;
-}
-
 .form-content {
   padding-top: 24px;
   display: grid;
