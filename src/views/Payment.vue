@@ -4,6 +4,7 @@
     <PaymentShippingAddressForm
       :stepName="paymentSteps[currentStep - 1].title"
     />
+    <PaymentActionButtonRow />
   </div>
 </template>
 
@@ -11,16 +12,18 @@
 import { paymentStepperConfig } from '../configs/paymentConfigs';
 import PaymentStepper from '../components/PaymentStepper';
 import PaymentShippingAddressForm from './PaymentShippingAddressForm';
+import PaymentActionButtonRow from '../components/PaymentActionButtonRow'
 
 export default {
   name: 'Payment',
   components: {
     PaymentStepper,
     PaymentShippingAddressForm,
+    PaymentActionButtonRow,
   },
   data() {
     return {
-      currentStep: 1,
+      currentStep: 2,
       paymentSteps: paymentStepperConfig,
     };
   },

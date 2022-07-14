@@ -6,7 +6,7 @@
           'step__circle',
           {
             active: isFinished(step.id),
-            disabled: currentStep !== step.id,
+            disabled: isDisabled(step.id),
           },
         ]"
       >
@@ -15,7 +15,7 @@
             'step__number',
             {
               active: isFinished(step.id),
-              disabled: currentStep !== step.id,
+              disabled: isDisabled(step.id),
             },
           ]"
           >{{ isFinished(step.id) ? '&#10004;' : step.id }}</span
@@ -25,7 +25,7 @@
         :class="[
           'step__title',
           {
-            disabled: !isFinished(step.id) && step.id !== currentStep,
+            disabled: isDisabled(step.id),
           },
         ]"
       >
@@ -36,7 +36,7 @@
         :class="[
           'step__line',
           {
-            disabled: !isFinished(step.id) && step.id !== currentStep,
+            disabled: isDisabled(step.id),
           },
         ]"
       ></div>
@@ -66,6 +66,9 @@ export default {
   methods: {
     isFinished(stepId) {
       return stepId < this.currentStep;
+    },
+    isDisabled(stepId) {
+      return stepId > this.currentStep;
     }
   }
 };
