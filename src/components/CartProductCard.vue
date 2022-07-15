@@ -3,14 +3,14 @@
     <img :src="getImg(product.image)" />
     <div class="product-card__counter">
       <p>{{ product.name }}</p>
-      <CartProductCounter />
+      <CartProductCounter @onCountClick="onCountClick" />
     </div>
     <p class="product-card__price">${{ product.price.toLocaleString() }}</p>
   </div>
 </template>
 
 <script>
-import CartProductCounter from './CartProductCounter'
+import CartProductCounter from './CartProductCounter';
 export default {
   name: 'CartProductCard',
   props: {
@@ -20,17 +20,22 @@ export default {
     },
   },
   components: {
-    CartProductCounter
+    CartProductCounter,
   },
   data() {
     return {
       product: this.initialProduct,
-      image: this.initialProduct.image,
     };
   },
   methods: {
     getImg(img) {
       return require(`../assets/${img}`);
+    },
+    onCountClick(payload) {
+      const { count } = payload;
+      this.$emit('onCountClick', {
+        price: Number(this.product.price) * count,
+      });
     },
   },
 };
