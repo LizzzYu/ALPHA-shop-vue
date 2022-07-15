@@ -4,7 +4,7 @@
     <main class="main-wrapper">
       <h1 class="main-title">結帳</h1>
       <Payment />
-      <div class="cart">cart</div>
+      <ShoppingCart />
     </main>
     <footer>fake footer</footer>
   </div>
@@ -12,21 +12,17 @@
 
 <script>
 import Payment from './views/Payment'
+import ShoppingCart from './views/ShoppingCart'
 export default {
   name: 'App',
   components: {
     Payment,
+    ShoppingCart
   }
 };
 </script>
 
 <style lang="scss">
-.cart {
-  height: 490px;
-  width: 100%;
-  background-color: $light-gray;
-  grid-column: 8 / 13
-}
 .main-title {
   font-family: 'Noto Sans TC';
   font-style: normal;
