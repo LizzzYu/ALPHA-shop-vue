@@ -1,8 +1,7 @@
 <template>
   <form class="form-wrapper">
-    <!-- <h3 class="title">{{ stepName }}</h3> -->
     <div class="form-content">
-      <div class="form-content__group">
+      <!-- <div class="form-content__group">
         <label class="form-content__group__title">稱謂</label>
         <div class="select-field">
           <select :class="{ disabled: title === -1 }" v-model="title">
@@ -12,19 +11,11 @@
           </select>
           <div class="select-field__icon"></div>
         </div>
-      </div>
-      <div class="form-content__group">
-        <label class="form-content__group__title">姓名</label>
-        <input placeholder="請輸入姓名" v-model="name" />
-      </div>
-      <div class="form-content__group">
-        <label class="form-content__group__title">電話</label>
-        <input placeholder="請輸入電話" v-model="phone" />
-      </div>
-      <div class="form-content__group">
-        <label class="form-content__group__title">Email</label>
-        <input placeholder="請輸入電子郵件" v-model="email" />
-      </div>
+      </div> -->
+      <SelectField v-model="title" :label="'稱謂'" />
+      <InputField :placeholder="'請輸入姓名'" :label="'姓名'" v-model="name" />
+      <InputField :placeholder="'請輸入電話'" :label="'電話'" v-model="phone" />
+      <InputField :placeholder="'請輸入電子郵件'" :label="'Email'" v-model="email" />
       <div class="form-content__group">
         <label class="form-content__group__title">縣市</label>
         <div class="select-field">
@@ -36,31 +27,30 @@
           <div class="select-field__icon"></div>
         </div>
       </div>
-      <div class="form-content__group">
-        <label class="form-content__group__title">地址</label>
-        <input placeholder="請輸入地址" v-model="address" />
-      </div>
+      <InputField :placeholder="'請輸入地址'" :label="'地址'" v-model="address" />
     </div>
   </form>
 </template>
 
 <script>
+import InputField from '../components/InputField';
+import SelectField from '../components/SelectField';
+
 export default {
   name: 'PaymentShippingAddressForm',
-  props: {
-    stepName: {
-      type: String,
-      required: true,
-    },
+  components: {
+    InputField,
+    SelectField,
   },
   data() {
     return {
-      title: -1,
+      title: '',
       name: '',
       phone: '',
       email: '',
       city: -1,
       address: '',
+      test: '',
     };
   },
 };
@@ -68,7 +58,6 @@ export default {
 
 <style lang="scss" scoped>
 .form-content {
-  padding-top: 24px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   column-gap: 30px;
@@ -77,6 +66,7 @@ export default {
   &__group {
     .select-field {
       position: relative;
+
       &__icon {
         position: absolute;
         right: 15px;
