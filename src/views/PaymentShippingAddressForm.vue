@@ -5,8 +5,8 @@
       <div class="form-content__group">
         <label class="form-content__group__title">稱謂</label>
         <div class="select-field">
-          <select :class="{ disabled: title === -1 }" v-model="title">
-            <option :value="-1" disabled>--請選擇--</option>
+          <select :class="{ disabled: title === '' }" v-model="title">
+            <option value="" disabled selected>--請選擇--</option>
             <option>先生</option>
             <option>小姐</option>
           </select>
@@ -20,8 +20,8 @@
       <div class="form-content__group">
         <label class="form-content__group__title">縣市</label>
         <div class="select-field">
-          <select :class="{ disabled: city === -1 }" v-model="city">
-            <option :value="-1" disabled>--請選擇--</option>
+          <select :class="{ disabled: city === '' }" v-model="city">
+            <option value="" disabled selected>--請選擇--</option>
             <option>台北市</option>
             <option>高雄市</option>
           </select>
@@ -45,11 +45,11 @@ export default {
   },
   data() {
     return {
-      title: -1,
+      title: '',
       name: '',
       phone: '',
       email: '',
-      city: -1,
+      city: '',
       address: '',
       test: '',
     };

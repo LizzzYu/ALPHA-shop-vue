@@ -14,7 +14,7 @@
           v-model="shippingMethod"
           @change="handleShippingMethodChange(option.price)"
         />
-        <div style="paddingleft: 50px">
+        <div>
           <p class="radio-option__left-column__title" for="one">
             {{ option.name }}
           </p>
@@ -23,7 +23,9 @@
           </p>
         </div>
       </div>
-      <p class="radio-option__price">{{ option.price }}</p>
+      <p class="radio-option__price">
+        {{ isNaN(option.price) ? '' : '$' }}{{ option.price }}
+      </p>
     </label>
   </div>
 </template>
@@ -35,16 +37,16 @@ export default {
   data() {
     return {
       paymentOptions: paymentShippingMethods,
-      shippingMethod: '',
+      shippingMethod: '標準運送',
     };
   },
   methods: {
     handleShippingMethodChange(price) {
       this.$emit('addShppingFee', {
-        price
-      })
-    }
-  }
+        price,
+      });
+    },
+  },
 };
 </script>
 
@@ -59,6 +61,7 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+
 .radio-option {
   width: 100%;
   display: flex;
@@ -68,6 +71,10 @@ export default {
   padding: 11px 20px;
   border: 1px solid $light-gray;
   border-radius: 4px;
+
+  &:hover {
+    border: 1px solid $black;
+  }
 
   &.checked {
     border: 1px solid $black;
