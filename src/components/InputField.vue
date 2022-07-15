@@ -2,7 +2,7 @@
   <div class="form-content__group">
     <label class="title">{{ label }}</label>
     <input
-      type="text"
+      :type="type"
       :placeholder="placeholder"
       :value="value"
       @input="onInput"
@@ -26,6 +26,11 @@ export default {
       type: String,
       required: true,
     },
+    type: {
+      type: String,
+      required: false,
+      default: 'text',
+    }
   },
   methods: {
     onInput(event) {
