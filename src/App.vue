@@ -3,22 +3,31 @@
     <header>fake ALPHA shop header</header>
     <main class="main-wrapper">
       <h1 class="main-title">結帳</h1>
-      <Payment />
-      <ShoppingCart />
+      <Payment @addShippingFee="addShppingFee" />
+      <ShoppingCart :shippingFee="shippingFee" />
     </main>
     <footer>fake footer</footer>
   </div>
 </template>
 
 <script>
-import Payment from './views/Payment'
-import ShoppingCart from './views/ShoppingCart'
+import Payment from './views/Payment';
+import ShoppingCart from './views/ShoppingCart';
 export default {
   name: 'App',
   components: {
     Payment,
-    ShoppingCart
-  }
+    ShoppingCart,
+  },
+  data() {
+    return { shippingFee: 0 };
+  },
+  methods: {
+    addShppingFee(payload) {
+      const { shippingFee } = payload;
+      this.shippingFee = shippingFee
+    },
+  },
 };
 </script>
 
@@ -35,11 +44,8 @@ export default {
 }
 
 #alpha-shop {
-  // font-family: 'Noto Sans TC', Avenir, Helvetica, Arial, sans-serif;
-  // font-family: 'Noto Sans TC', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
 }
 
 .main-wrapper {

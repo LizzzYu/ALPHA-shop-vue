@@ -24,7 +24,7 @@
         </div>
       </div>
       <p class="radio-option__price">
-        {{ isNaN(option.price) ? '' : '$' }}{{ option.price }}
+        {{ option.price === 0 ? '免費' : '$' + option.price }}
       </p>
     </label>
   </div>
@@ -43,7 +43,7 @@ export default {
   methods: {
     handleShippingMethodChange(price) {
       this.$emit('addShppingFee', {
-        price,
+        shippingFee: price,
       });
     },
   },
@@ -67,7 +67,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 11px 20px;
   border: 1px solid $light-gray;
   border-radius: 4px;

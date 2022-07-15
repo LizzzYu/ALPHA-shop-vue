@@ -6,11 +6,15 @@
         v-for="product in products"
         :key="product.id"
         :initialProduct="product"
+        @onCountClick="onCountClick"
       />
     </div>
     <div class="cart-wrapper__info">
-      <CartOrderInfoRow :title="'運費'" :price="shippingPrice" />
-      <CartOrderInfoRow :title="'小計'" :price="totalPrice" />
+      <CartOrderInfoRow :title="'運費'" :price="getFee(shippingFee)" />
+      <CartOrderInfoRow
+        :title="'小計'"
+        :price="'$' + (totalPrice + shippingFee).toLocaleString()"
+      />
     </div>
   </div>
 </template>
@@ -26,12 +30,30 @@ export default {
     CartProductCard,
     CartOrderInfoRow,
   },
+  props: {
+    shippingFee: {
+      type: [String, Number],
+      required: true,
+    },
+  },
   data() {
     return {
       products: productsList,
-      shippingPrice: '',
-      totalPrice: ''
+      totalPrice: 0,
     };
+  },
+  methods: {
+    onCountClick(payload) {
+      const { price } = payload;
+      this.totalPrice += price;
+    },
+    getFee(fee) {
+      if (fee === 0) {
+        return '免費'
+      } else {
+        return `$${fee}`
+      }
+    }
   },
 };
 </script>

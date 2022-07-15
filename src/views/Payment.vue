@@ -47,7 +47,10 @@ export default {
       this.currentStep = currentStep;
     },
     addShppingFee(payload) {
-      console.log(payload);
+      const { shippingFee } = payload;
+      this.$emit('addShippingFee', {
+        shippingFee
+      })
     },
   },
 };

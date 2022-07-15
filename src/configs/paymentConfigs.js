@@ -18,7 +18,7 @@ export const paymentShippingMethods = [
     id: 1,
     name: '標準運送',
     description: '約 3~7 個工作天',
-    price: '免費'
+    price: 0
   },
   {
     id: 2,
