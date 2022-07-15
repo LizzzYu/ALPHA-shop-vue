@@ -70,6 +70,7 @@ export default {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  user-select: none;
 }
 
 .next-button {
