@@ -1,8 +1,14 @@
 <template>
   <div class="buttons-wrapper">
-    <button class="btn prev-button" v-if="currentStep !== 1">← 上一步</button>
+    <button
+      @click.stop.prevent="handlePrevStepClick"
+      class="btn prev-button"
+      v-if="currentStep !== 1"
+    >
+      ← 上一步
+    </button>
     <div v-else></div>
-    <button class="btn next-button">
+    <button @click.stop.prevent="handleNextStepClick" class="btn next-button">
       {{ currentStep !== totalSteps ? '下一步 →' : '確認下單' }}
     </button>
   </div>
@@ -16,15 +22,34 @@ export default {
       type: Number,
       required: true,
     },
+    initialCurrentStep: {
+      type: Number,
+      required: true,
+    },
   },
   data() {
     return {
-      currentStep: 2,
+      currentStep: this.initialCurrentStep,
     };
   },
   methods: {
-    
-  }
+    handlePrevStepClick() {
+      if (this.currentStep !== 1) {
+        this.currentStep = this.currentStep - 1;
+        this.$emit('handleStepClick', {
+          currentStep: this.currentStep,
+        });
+      }
+    },
+    handleNextStepClick() {
+      if (this.currentStep !== this.totalSteps) {
+        this.currentStep = this.currentStep + 1;
+        this.$emit('handleStepClick', {
+          currentStep: this.currentStep,
+        });
+      }
+    },
+  },
 };
 </script>
 

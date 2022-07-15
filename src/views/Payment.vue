@@ -7,7 +7,11 @@
         :stepName="paymentSteps[currentStep - 1].title"
       />
     </div>
-    <PaymentActionButtonRow :totalSteps="paymentSteps.length" />
+    <PaymentActionButtonRow
+      :initialCurrentStep="currentStep"
+      :totalSteps="paymentSteps.length"
+      @handleStepClick="handleStepClick"
+    />
   </div>
 </template>
 
@@ -30,6 +34,12 @@ export default {
       paymentSteps: paymentStepperConfig,
     };
   },
+  methods: {
+    handleStepClick(payload) {
+      const { currentStep } = payload
+      this.currentStep = currentStep
+    }
+  }
 };
 </script>
 

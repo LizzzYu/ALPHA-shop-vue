@@ -51,5 +51,6 @@ export default {
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+  padding-bottom: 124px;
 }
 </style>
