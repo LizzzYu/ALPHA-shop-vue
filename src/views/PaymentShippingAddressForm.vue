@@ -1,7 +1,8 @@
 <template>
   <form class="form-wrapper">
     <div class="form-content">
-      <!-- <div class="form-content__group">
+      <!-- TODO: costomize select compoent -->
+      <div class="form-content__group">
         <label class="form-content__group__title">稱謂</label>
         <div class="select-field">
           <select :class="{ disabled: title === -1 }" v-model="title">
@@ -11,8 +12,8 @@
           </select>
           <div class="select-field__icon"></div>
         </div>
-      </div> -->
-      <SelectField v-model="title" :label="'稱謂'" />
+      </div>
+      <!-- <SelectField v-model="title" :label="'稱謂'" /> -->
       <InputField :placeholder="'請輸入姓名'" :label="'姓名'" v-model="name" />
       <InputField :placeholder="'請輸入電話'" :label="'電話'" v-model="phone" />
       <InputField :placeholder="'請輸入電子郵件'" :label="'Email'" v-model="email" />
@@ -34,17 +35,17 @@
 
 <script>
 import InputField from '../components/InputField';
-import SelectField from '../components/SelectField';
+// import SelectField from '../components/SelectField';
 
 export default {
   name: 'PaymentShippingAddressForm',
   components: {
     InputField,
-    SelectField,
+    // SelectField,
   },
   data() {
     return {
-      title: '',
+      title: -1,
       name: '',
       phone: '',
       email: '',
