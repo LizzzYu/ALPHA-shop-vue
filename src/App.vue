@@ -3,8 +3,11 @@
     <header>fake ALPHA shop header</header>
     <main class="main-wrapper">
       <h1 class="main-title">結帳</h1>
-      <Payment @addShippingFee="addShppingFee" />
-      <ShoppingCart :shippingFee="shippingFee" />
+      <Payment :totalPrice="totalPrice" @addShippingFee="addShppingFee" />
+      <ShoppingCart
+        :shippingFee="shippingFee"
+        @totalPriceChanged="totalPriceChanged"
+      />
     </main>
     <footer>fake footer</footer>
   </div>
@@ -20,12 +23,19 @@ export default {
     ShoppingCart,
   },
   data() {
-    return { shippingFee: 0 };
+    return {
+      shippingFee: 0,
+      totalPrice: 0,
+    };
   },
   methods: {
     addShppingFee(payload) {
       const { shippingFee } = payload;
-      this.shippingFee = shippingFee
+      this.shippingFee = shippingFee;
+    },
+    totalPriceChanged(payload) {
+      const { totalPrice } = payload;
+      this.totalPrice = totalPrice;
     },
   },
 };

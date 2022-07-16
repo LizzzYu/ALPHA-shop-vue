@@ -48,6 +48,12 @@ export default {
     PaymentShippingInforForm,
     PaymentActionButtonRow,
   },
+  props: {
+    totalPrice: {
+      type: Number,
+      required: true,
+    }
+  },
   data() {
     return {
       currentStep: 1,
@@ -57,6 +63,7 @@ export default {
       isFormFinished: false,
     };
   },
+  
   methods: {
     handleStepClick(payload) {
       const { currentStep } = payload;
@@ -73,6 +80,7 @@ export default {
       const filteredKeys = Object.keys(paymentFormData).filter((key) => key);
 
       filteredKeys.forEach((key) => {
+        this.paymentformData['totalPrice'] = this.totalPrice;
         this.paymentformData[key] = paymentFormData[key];
       });
 

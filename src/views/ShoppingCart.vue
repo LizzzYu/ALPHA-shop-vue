@@ -46,6 +46,9 @@ export default {
     onCountClick(payload) {
       const { price } = payload;
       this.totalPrice += price;
+      this.$emit('totalPriceChanged', {
+        totalPrice: this.totalPrice
+      })
     },
     getFee(fee) {
       if (fee === 0) {
