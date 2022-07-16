@@ -1,19 +1,32 @@
 <template>
   <div class="payment-wrapper">
     <div>
-      <PaymentStepper :currentStep="currentStep" :paymentSteps="paymentSteps" />
+      <PaymentStepper
+        :currentStep="currentStep"
+        :paymentSteps="paymentSteps"
+        :isFormFinished="isFormFinished"
+      />
       <h3 class="title">{{ paymentSteps[currentStep - 1].title }}</h3>
-      <PaymentShippingAddressForm v-if="currentStep === 1" />
+      <PaymentShippingAddressForm
+        v-if="currentStep === 1"
+        @handlePaymentFormSubmit="handlePaymentFormSubmit"
+      />
       <PaymentShippingMethodsForm
         v-else-if="currentStep === 2"
         @addShppingFee="addShppingFee"
+        @handlePaymentFormSubmit="handlePaymentFormSubmit"
       />
-      <PaymentShippingInforForm v-else />
+      <PaymentShippingInforForm
+        v-else
+        :isSubmitForm="isSubmitForm"
+        @handlePaymentFormSubmit="handlePaymentFormSubmit"
+      />
     </div>
     <PaymentActionButtonRow
       :initialCurrentStep="currentStep"
       :totalSteps="paymentSteps.length"
       @handleStepClick="handleStepClick"
+      @handleSubmitForm="handleSubmitForm"
     />
   </div>
 </template>
@@ -39,6 +52,9 @@ export default {
     return {
       currentStep: 1,
       paymentSteps: paymentStepperConfig,
+      paymentformData: {},
+      isSubmitForm: false,
+      isFormFinished: false,
     };
   },
   methods: {
@@ -49,8 +65,25 @@ export default {
     addShppingFee(payload) {
       const { shippingFee } = payload;
       this.$emit('addShippingFee', {
-        shippingFee
-      })
+        shippingFee,
+      });
+    },
+    handlePaymentFormSubmit(payload) {
+      const { paymentFormData, isFormFinished } = payload;
+      const filteredKeys = Object.keys(paymentFormData).filter((key) => key);
+
+      filteredKeys.forEach((key) => {
+        this.paymentformData[key] = paymentFormData[key];
+      });
+
+      if (isFormFinished) {
+        this.isFormFinished = isFormFinished;
+        console.log('paymentformData', this.paymentformData);
+      }
+    },
+    handleSubmitForm(payload) {
+      const { isSubmitForm } = payload;
+      this.isSubmitForm = isSubmitForm;
     },
   },
 };

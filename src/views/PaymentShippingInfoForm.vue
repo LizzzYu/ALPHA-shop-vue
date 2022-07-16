@@ -34,13 +34,32 @@ export default {
   components: {
     InputField,
   },
+  props: {
+    isSubmitForm: {
+      type: Boolean,
+      required: true,
+    },
+  },
   data() {
     return {
       cardOwnerName: '',
       cardNumber: '',
       validityPeriod: '',
-      cvc_ccv: ''
+      cvc_ccv: '',
     };
+  },
+  watch: {
+    isSubmitForm: function () {
+      this.$emit('handlePaymentFormSubmit', {
+        paymentFormData: {
+          cardOwnerName: this.cardOwnerName,
+          cardNumber: this.cardNumber,
+          validityPeriod: this.validityPeriod,
+          cvc_ccv: this.cvc_ccv,
+        },
+        isFormFinished: true,
+      });
+    },
   },
 };
 </script>

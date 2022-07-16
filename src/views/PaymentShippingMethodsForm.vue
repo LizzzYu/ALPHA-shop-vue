@@ -38,14 +38,23 @@ export default {
     return {
       paymentOptions: paymentShippingMethods,
       shippingMethod: '標準運送',
+      shippingFee: 0,
     };
   },
   methods: {
     handleShippingMethodChange(price) {
+      this.shippingFee = price;
       this.$emit('addShppingFee', {
         shippingFee: price,
       });
     },
+  },
+  beforeDestroy() {
+    this.$emit('handlePaymentFormSubmit', {
+      paymentFormData: {
+        shippingFee: this.shippingFee,
+      },
+    });
   },
 };
 </script>

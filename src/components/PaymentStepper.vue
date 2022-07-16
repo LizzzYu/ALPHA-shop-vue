@@ -5,7 +5,7 @@
         :class="[
           'step__circle',
           {
-            active: isFinished(step.id),
+            active: isFinished(step.id) || isFormFinished,
             disabled: isDisabled(step.id),
           },
         ]"
@@ -14,11 +14,11 @@
           :class="[
             'step__number',
             {
-              active: isFinished(step.id),
+              active: isFinished(step.id) || isFormFinished,
               disabled: isDisabled(step.id),
             },
           ]"
-          >{{ isFinished(step.id) ? '&#10004;' : step.id }}</span
+          >{{ isFinished(step.id) || isFormFinished ? '&#10004;' : step.id }}</span
         >
       </div>
       <p
@@ -55,6 +55,10 @@ export default {
     paymentSteps: {
       type: Array,
       required: true
+    },
+    isFormFinished: {
+      type: Boolean,
+      required: true
     }
   },
   data() {
@@ -77,7 +81,6 @@ export default {
 <style lang="scss" scoped>
 .stepper-wrapper {
   display: grid;
-  // grid-template-columns: auto 1fr auto 1fr auto;
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   column-gap: 32px;

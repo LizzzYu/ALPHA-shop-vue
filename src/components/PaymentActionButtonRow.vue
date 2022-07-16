@@ -47,6 +47,10 @@ export default {
         this.$emit('handleStepClick', {
           currentStep: this.currentStep,
         });
+      } else {
+        this.$emit('handleSubmitForm', {
+          isSubmitForm: true,
+        });
       }
     },
   },

@@ -5,7 +5,7 @@
       <div class="form-content__group">
         <label class="form-content__group__title">稱謂</label>
         <div class="select-field">
-          <select :class="{ disabled: title === '' }" v-model="title">
+          <select :class="{ disabled: salutation === '' }" v-model="salutation">
             <option value="" disabled selected>--請選擇--</option>
             <option>先生</option>
             <option>小姐</option>
@@ -45,15 +45,26 @@ export default {
   },
   data() {
     return {
-      title: '',
+      salutation: '',
       name: '',
       phone: '',
       email: '',
       city: '',
       address: '',
-      test: '',
     };
   },
+  beforeDestroy() {
+    this.$emit('handlePaymentFormSubmit', {
+      paymentFormData: {
+        salutation: this.salutation,
+        name: this.name,
+        phone: this.phone,
+        email: this.email,
+        city: this.city,
+        address: this.address,
+      }
+    })
+  }
 };
 </script>
 
