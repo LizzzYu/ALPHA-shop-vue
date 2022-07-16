@@ -32,9 +32,10 @@ export default {
       return require(`../assets/${img}`);
     },
     onCountClick(payload) {
-      const { count } = payload;
+      const { action } = payload;
       this.$emit('onCountClick', {
-        price: Number(this.product.price) * count,
+        price: Number(this.product.price),
+        action
       });
     },
   },

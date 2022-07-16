@@ -44,19 +44,25 @@ export default {
   },
   methods: {
     onCountClick(payload) {
-      const { price } = payload;
-      this.totalPrice += price;
+      const { action, price } = payload;
+      if (action === 'add') {
+        this.totalPrice += price;
+      } else {
+        this.totalPrice -= price;
+      }
+
       this.$emit('totalPriceChanged', {
-        totalPrice: this.totalPrice
-      })
+        totalPrice: this.totalPrice,
+      });
     },
+
     getFee(fee) {
       if (fee === 0) {
-        return '免費'
+        return '免費';
       } else {
-        return `$${fee}`
+        return `$${fee}`;
       }
-    }
+    },
   },
 };
 </script>

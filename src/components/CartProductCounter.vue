@@ -26,13 +26,13 @@ export default {
     addCount() {
       this.count = this.count + 1;
       this.$emit('onCountClick', {
-        count: this.count
+        action: 'add',
       })
     },
     minusCount() {
       this.count = this.count - 1;
       this.$emit('onCountClick', {
-        count: this.count
+        action: 'minus',
       })
     },
   },
