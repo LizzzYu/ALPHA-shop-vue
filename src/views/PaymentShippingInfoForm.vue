@@ -48,17 +48,21 @@ export default {
       cvc_ccv: '',
     };
   },
+  methods: {
+  },
   watch: {
     isSubmitForm: function () {
-      this.$emit('handlePaymentFormSubmit', {
-        paymentFormData: {
-          cardOwnerName: this.cardOwnerName,
-          cardNumber: this.cardNumber,
-          validityPeriod: this.validityPeriod,
-          cvc_ccv: this.cvc_ccv,
-        },
-        isFormFinished: true,
-      });
+      if (this.isSubmitForm) {
+        this.$emit('handlePaymentFormSubmit', {
+          paymentFormData: {
+            cardOwnerName: this.cardOwnerName,
+            cardNumber: this.cardNumber,
+            validityPeriod: this.validityPeriod,
+            cvc_ccv: this.cvc_ccv,
+          },
+          isFormFinished: true,
+        });
+      }
     },
   },
 };

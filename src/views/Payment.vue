@@ -28,6 +28,11 @@
       @handleStepClick="handleStepClick"
       @handleSubmitForm="handleSubmitForm"
     />
+    <Modal
+      v-if="isModalShow"
+      @closeModal="closeModal"
+      :paymentformData="paymentformData"
+    />
   </div>
 </template>
 
@@ -38,6 +43,7 @@ import PaymentShippingAddressForm from './PaymentShippingAddressForm';
 import PaymentShippingMethodsForm from './PaymentShippingMethodsForm';
 import PaymentShippingInforForm from './PaymentShippingInfoForm';
 import PaymentActionButtonRow from '../components/PaymentActionButtonRow';
+import Modal from '../components/Modal';
 
 export default {
   name: 'Payment',
@@ -47,12 +53,13 @@ export default {
     PaymentShippingMethodsForm,
     PaymentShippingInforForm,
     PaymentActionButtonRow,
+    Modal,
   },
   props: {
     totalPrice: {
       type: Number,
       required: true,
-    }
+    },
   },
   data() {
     return {
@@ -61,9 +68,10 @@ export default {
       paymentformData: {},
       isSubmitForm: false,
       isFormFinished: false,
+      isModalShow: false,
     };
   },
-  
+
   methods: {
     handleStepClick(payload) {
       const { currentStep } = payload;
@@ -86,12 +94,19 @@ export default {
 
       if (isFormFinished) {
         this.isFormFinished = isFormFinished;
+        this.isModalShow = true;
         console.log('paymentformData', this.paymentformData);
       }
     },
     handleSubmitForm(payload) {
       const { isSubmitForm } = payload;
       this.isSubmitForm = isSubmitForm;
+    },
+    closeModal(payload) {
+      const { isModalShow } = payload;
+      this.isModalShow = isModalShow;
+      this.isFormFinished = false;
+      this.isSubmitForm = false
     },
   },
 };

@@ -54,6 +54,7 @@ export default {
 }
 
 #alpha-shop {
+  position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
