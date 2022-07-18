@@ -1,7 +1,7 @@
 <template>
   <form class="form-wrapper">
     <div class="form-content">
-      <!-- TODO: costomize select compoent -->
+      <!-- TODO: customize select component -->
       <div class="form-content__group">
         <label class="form-content__group__title">稱謂</label>
         <div class="select-field">

@@ -21,12 +21,12 @@ const routes = [
     //   {
     //     path: '/main',
     //     name: 'form',
-    //     // redirect: '/main/form/shippingAdress',
+    //     // redirect: '/main/form/shippingAddress',
     //     component: Payment,
     //     children: [
     //       {
-    //         path: 'shippingAdress',
-    //         name: 'shippingAdress',
+    //         path: 'shippingAddress',
+    //         name: 'shippingAddress',
     //         component: () => import('../views/PaymentShippingAddressForm.vue'),
     //       },
     //       {
@@ -51,12 +51,12 @@ const routes = [
   {
     path: '/main',
     name: 'form',
-    redirect: '/main/shippingAdress',
+    redirect: '/main/shippingAddress',
     component: Payment,
     children: [
       {
-        path: 'shippingAdress',
-        name: 'shippingAdress',
+        path: 'shippingAddress',
+        name: 'shippingAddress',
         component: () => import('../views/PaymentShippingAddressForm.vue'),
       },
       {
@@ -74,7 +74,7 @@ const routes = [
   {
     path: '*',
     name: 'notFound',
-    conponent: NotFound,
+    component: NotFound,
   },
 ];
 

@@ -9,13 +9,13 @@
       <h3 class="title">{{ paymentSteps[currentStep - 1].title }}</h3>
       <router-view
         :isSubmitForm="isSubmitForm"
-        @addShppingFee="addShppingFee"
+        @addShippingFee="addShippingFee"
         @handlePaymentFormSubmit="handlePaymentFormSubmit"
       />
-      <!-- <conponent
+      <!-- <component
         :is="currentView"
         :isSubmitForm="isSubmitForm"
-        @addShppingFee="addShppingFee"
+        @addShippingFee="addShippingFee"
         @handlePaymentFormSubmit="handlePaymentFormSubmit"
         /> -->
     </div>
@@ -28,7 +28,7 @@
     <Modal
       v-if="isModalShow"
       @closeModal="closeModal"
-      :paymentformData="paymentformData"
+      :paymentFormData="paymentFormData"
     />
   </div>
 </template>
@@ -59,7 +59,7 @@ export default {
     return {
       currentStep: 1,
       paymentSteps: paymentStepperConfig,
-      paymentformData: {},
+      paymentFormData: {},
       isSubmitForm: false,
       isFormFinished: false,
       isModalShow: false,
@@ -74,7 +74,7 @@ export default {
 
       switch (this.currentStep) {
         case 1:
-          this.$router.push('/main/shippingAdress');
+          this.$router.push('/main/shippingAddress');
           break;
         case 2:
           this.$router.push('/main/shippingMethods');
@@ -84,7 +84,7 @@ export default {
           break;
       }
     },
-    addShppingFee(payload) {
+    addShippingFee(payload) {
       const { shippingFee } = payload;
       this.shippingFee = shippingFee;
       this.$emit('addShippingFee', {
@@ -96,14 +96,14 @@ export default {
       const filteredKeys = Object.keys(paymentFormData).filter((key) => key);
 
       filteredKeys.forEach((key) => {
-        this.paymentformData['totalPrice'] = this.totalPrice + this.shippingFee;
-        this.paymentformData[key] = paymentFormData[key];
+        this.paymentFormData['totalPrice'] = this.totalPrice + this.shippingFee;
+        this.paymentFormData[key] = paymentFormData[key];
       });
 
       if (isFormFinished) {
         this.isFormFinished = isFormFinished;
         this.isModalShow = true;
-        console.log('paymentformData', this.paymentformData);
+        console.log('paymentFormData', this.paymentFormData);
       }
     },
     handleSubmitForm(payload) {

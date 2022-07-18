@@ -44,7 +44,7 @@ export default {
   methods: {
     handleShippingMethodChange(price) {
       this.shippingFee = price;
-      this.$emit('addShppingFee', {
+      this.$emit('addShippingFee', {
         shippingFee: price,
       });
     },

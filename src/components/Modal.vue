@@ -7,7 +7,7 @@
       <div class="modal__title-row">
         <h4>訂單詳情</h4>
       </div>
-      {{ paymentformData }}
+      {{ paymentFormData }}
     </div>
     <div class="modal__background"></div>
   </div>
@@ -17,7 +17,7 @@
 export default {
   name: 'Modal',
   props: {
-    paymentformData: {
+    paymentFormData: {
       type: Object,
       required: true,
     },

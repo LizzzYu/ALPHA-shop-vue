@@ -30,7 +30,7 @@
 <script>
 import InputField from '../components/InputField';
 export default {
-  name: 'PaymentShippingInforForm',
+  name: 'PaymentShippingInfoForm',
   components: {
     InputField,
   },

@@ -5,7 +5,7 @@
       <h1 class="main-title">結帳</h1>
       <router-view
         :totalPrice="totalPrice"
-        @addShippingFee="addShppingFee" />
+        @addShippingFee="addShippingFee" />
       <ShoppingCart
         :shippingFee="shippingFee"
         @totalPriceChanged="totalPriceChanged"
@@ -29,7 +29,7 @@ export default {
     };
   },
   methods: {
-    addShppingFee(payload) {
+    addShippingFee(payload) {
       const { shippingFee } = payload;
       this.shippingFee = shippingFee;
     },
