@@ -52,7 +52,7 @@ export default {
       }
 
       this.$emit('totalPriceChanged', {
-        totalPrice: this.totalPrice + this.shippingFee,
+        totalPrice: this.totalPrice,
       });
     },
 

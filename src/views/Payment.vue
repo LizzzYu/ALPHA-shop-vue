@@ -7,12 +7,17 @@
         :isFormFinished="isFormFinished"
       />
       <h3 class="title">{{ paymentSteps[currentStep - 1].title }}</h3>
-      <conponent
+      <router-view
+        :isSubmitForm="isSubmitForm"
+        @addShppingFee="addShppingFee"
+        @handlePaymentFormSubmit="handlePaymentFormSubmit"
+      />
+      <!-- <conponent
         :is="currentView"
         :isSubmitForm="isSubmitForm"
         @addShppingFee="addShppingFee"
         @handlePaymentFormSubmit="handlePaymentFormSubmit"
-        />
+        /> -->
     </div>
     <PaymentActionButtonRow
       :initialCurrentStep="currentStep"
@@ -31,18 +36,15 @@
 <script>
 import { paymentStepperConfig } from '../configs/paymentConfigs';
 import PaymentStepper from '../components/PaymentStepper';
-import PaymentShippingAddressForm from './PaymentShippingAddressForm';
-import PaymentShippingMethodsForm from './PaymentShippingMethodsForm';
-import PaymentShippingInfoForm from './PaymentShippingInfoForm';
 import PaymentActionButtonRow from '../components/PaymentActionButtonRow';
 import Modal from '../components/Modal';
 
 export default {
   name: 'Payment',
   components: {
-    'ShippingAddressForm': PaymentShippingAddressForm,
-    'ShippingMethodsForm': PaymentShippingMethodsForm,
-    'ShippingInfoForm': PaymentShippingInfoForm,
+    // 'ShippingAddressForm': PaymentShippingAddressForm,
+    // 'ShippingMethodsForm': PaymentShippingMethodsForm,
+    // 'ShippingInfoForm': PaymentShippingInfoForm,
     PaymentStepper,
     PaymentActionButtonRow,
     Modal,
@@ -61,6 +63,7 @@ export default {
       isSubmitForm: false,
       isFormFinished: false,
       isModalShow: false,
+      shippingFee: 0,
     };
   },
 
@@ -68,9 +71,22 @@ export default {
     handleStepClick(payload) {
       const { currentStep } = payload;
       this.currentStep = currentStep;
+
+      switch (this.currentStep) {
+        case 1:
+          this.$router.push('/main/shippingAdress');
+          break;
+        case 2:
+          this.$router.push('/main/shippingMethods');
+          break;
+        case 3:
+          this.$router.push('/main/shippingInfo');
+          break;
+      }
     },
     addShppingFee(payload) {
       const { shippingFee } = payload;
+      this.shippingFee = shippingFee;
       this.$emit('addShippingFee', {
         shippingFee,
       });
@@ -80,7 +96,7 @@ export default {
       const filteredKeys = Object.keys(paymentFormData).filter((key) => key);
 
       filteredKeys.forEach((key) => {
-        this.paymentformData['totalPrice'] = this.totalPrice;
+        this.paymentformData['totalPrice'] = this.totalPrice + this.shippingFee;
         this.paymentformData[key] = paymentFormData[key];
       });
 
@@ -98,23 +114,23 @@ export default {
       const { isModalShow } = payload;
       this.isModalShow = isModalShow;
       this.isFormFinished = false;
-      this.isSubmitForm = false
+      this.isSubmitForm = false;
     },
   },
   computed: {
     currentView() {
-      switch(this.currentStep) {
+      switch (this.currentStep) {
         case 1:
-          return 'ShippingAddressForm'
+          return 'ShippingAddressForm';
         case 2:
-          return 'ShippingMethodsForm'
+          return 'ShippingMethodsForm';
         case 3:
-          return 'ShippingInfoForm'
+          return 'ShippingInfoForm';
         default:
-          return 'ShippingAddressForm'
+          return 'ShippingAddressForm';
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

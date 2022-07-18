@@ -3,7 +3,9 @@
     <header>fake ALPHA shop header</header>
     <main class="main-wrapper">
       <h1 class="main-title">結帳</h1>
-      <Payment :totalPrice="totalPrice" @addShippingFee="addShppingFee" />
+      <router-view
+        :totalPrice="totalPrice"
+        @addShippingFee="addShppingFee" />
       <ShoppingCart
         :shippingFee="shippingFee"
         @totalPriceChanged="totalPriceChanged"
@@ -14,12 +16,10 @@
 </template>
 
 <script>
-import Payment from './views/Payment';
 import ShoppingCart from './views/ShoppingCart';
 export default {
   name: 'App',
   components: {
-    Payment,
     ShoppingCart,
   },
   data() {
