@@ -36,7 +36,7 @@
 
 <script>
 import { paymentStepperConfig } from '../configs/paymentConfigs';
-import { setStorage, getStorage } from '../utils/localStorage';
+import { setStorage } from '../utils/localStorage';
 import PaymentStepper from '../components/PaymentStepper';
 import PaymentActionButtonRow from '../components/PaymentActionButtonRow';
 import Modal from '../components/Modal';
@@ -58,15 +58,15 @@ export default {
       type: Number,
       required: true,
     },
-  },
-  created() {
-    this.paymentFormData = getStorage(STORAGE_KEY)
+    paymentFormData: {
+      type: Object,
+      required: true,
+    }
   },
   data() {
     return {
       currentStep: 1,
       paymentSteps: paymentStepperConfig,
-      paymentFormData: {},
       isSubmitForm: false,
       isFormFinished: false,
       isModalShow: false,

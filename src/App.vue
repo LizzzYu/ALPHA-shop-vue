@@ -5,9 +5,12 @@
       <h1 class="main-title">結帳</h1>
       <router-view
         :totalPrice="totalPrice"
-        @addShippingFee="addShippingFee" />
+        :paymentFormData="paymentFormData"
+        @addShippingFee="addShippingFee"
+      />
       <ShoppingCart
         :shippingFee="shippingFee"
+        :paymentFormData="paymentFormData"
         @totalPriceChanged="totalPriceChanged"
       />
     </main>
@@ -17,6 +20,9 @@
 
 <script>
 import ShoppingCart from './views/ShoppingCart';
+import { getStorage } from './utils/localStorage';
+const STORAGE_KEY = 'payment-data';
+
 export default {
   name: 'App',
   components: {
@@ -26,7 +32,11 @@ export default {
     return {
       shippingFee: 0,
       totalPrice: 0,
+      paymentFormData: {},
     };
+  },
+  created() {
+    this.paymentFormData = getStorage(STORAGE_KEY);
   },
   methods: {
     addShippingFee(payload) {

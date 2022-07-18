@@ -35,6 +35,10 @@ export default {
       type: [String, Number],
       required: true,
     },
+    paymentFormData: {
+      type: Object,
+      required: true,
+    }
   },
   data() {
     return {

@@ -44,6 +44,11 @@ export default {
       shippingFee: this.paymentFormData.shippingFee || 0,
     };
   },
+  created() {
+    if (this.shippingFee !== 0) {
+      this.handleShippingMethodChange(this.shippingFee);
+    }
+  },
   methods: {
     handleShippingMethodChange(price) {
       this.shippingFee = price;
@@ -56,7 +61,7 @@ export default {
     this.$emit('handlePaymentFormSubmit', {
       paymentFormData: {
         shippingFee: this.shippingFee,
-        shippingMethod: this.shippingMethod
+        shippingMethod: this.shippingMethod,
       },
     });
   },
