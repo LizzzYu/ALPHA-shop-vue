@@ -7,20 +7,12 @@
         :isFormFinished="isFormFinished"
       />
       <h3 class="title">{{ paymentSteps[currentStep - 1].title }}</h3>
-      <PaymentShippingAddressForm
-        v-if="currentStep === 1"
-        @handlePaymentFormSubmit="handlePaymentFormSubmit"
-      />
-      <PaymentShippingMethodsForm
-        v-else-if="currentStep === 2"
+      <conponent
+        :is="currentView"
+        :isSubmitForm="isSubmitForm"
         @addShppingFee="addShppingFee"
         @handlePaymentFormSubmit="handlePaymentFormSubmit"
-      />
-      <PaymentShippingInforForm
-        v-else
-        :isSubmitForm="isSubmitForm"
-        @handlePaymentFormSubmit="handlePaymentFormSubmit"
-      />
+        />
     </div>
     <PaymentActionButtonRow
       :initialCurrentStep="currentStep"
@@ -41,17 +33,17 @@ import { paymentStepperConfig } from '../configs/paymentConfigs';
 import PaymentStepper from '../components/PaymentStepper';
 import PaymentShippingAddressForm from './PaymentShippingAddressForm';
 import PaymentShippingMethodsForm from './PaymentShippingMethodsForm';
-import PaymentShippingInforForm from './PaymentShippingInfoForm';
+import PaymentShippingInfoForm from './PaymentShippingInfoForm';
 import PaymentActionButtonRow from '../components/PaymentActionButtonRow';
 import Modal from '../components/Modal';
 
 export default {
   name: 'Payment',
   components: {
+    'ShippingAddressForm': PaymentShippingAddressForm,
+    'ShippingMethodsForm': PaymentShippingMethodsForm,
+    'ShippingInfoForm': PaymentShippingInfoForm,
     PaymentStepper,
-    PaymentShippingAddressForm,
-    PaymentShippingMethodsForm,
-    PaymentShippingInforForm,
     PaymentActionButtonRow,
     Modal,
   },
@@ -109,6 +101,20 @@ export default {
       this.isSubmitForm = false
     },
   },
+  computed: {
+    currentView() {
+      switch(this.currentStep) {
+        case 1:
+          return 'ShippingAddressForm'
+        case 2:
+          return 'ShippingMethodsForm'
+        case 3:
+          return 'ShippingInfoForm'
+        default:
+          return 'ShippingAddressForm'
+      }
+    }
+  }
 };
 </script>
 
