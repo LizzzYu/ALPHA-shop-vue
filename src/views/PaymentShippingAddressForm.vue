@@ -16,25 +16,35 @@
       <!-- <SelectField v-model="title" :label="'稱謂'" /> -->
       <InputField :placeholder="'請輸入姓名'" :label="'姓名'" v-model="name" />
       <InputField :placeholder="'請輸入電話'" :label="'電話'" v-model="phone" />
-      <InputField :placeholder="'請輸入電子郵件'" :label="'Email'" v-model="email" />
+      <InputField
+        :placeholder="'請輸入電子郵件'"
+        :label="'Email'"
+        v-model="email"
+      />
       <div class="form-content__group">
         <label class="form-content__group__title">縣市</label>
         <div class="select-field">
           <select :class="{ disabled: city === '' }" v-model="city">
             <option value="" disabled selected>--請選擇--</option>
-            <option>台北市</option>
-            <option>高雄市</option>
+            <option v-for="country in countries" :key="country.id">
+              {{ country }}
+            </option>
           </select>
           <div class="select-field__icon"></div>
         </div>
       </div>
-      <InputField :placeholder="'請輸入地址'" :label="'地址'" v-model="address" />
+      <InputField
+        :placeholder="'請輸入地址'"
+        :label="'地址'"
+        v-model="address"
+      />
     </div>
   </form>
 </template>
 
 <script>
 import InputField from '../components/InputField';
+import { countries } from '../configs/paymentConfigs';
 // import SelectField from '../components/SelectField';
 
 export default {
@@ -44,7 +54,7 @@ export default {
     // SelectField,
   },
   props: {
-    paymentFormData: Object
+    paymentFormData: Object,
   },
   data() {
     return {
@@ -54,6 +64,7 @@ export default {
       email: this.paymentFormData.email || '',
       city: this.paymentFormData.city || '',
       address: this.paymentFormData.address || '',
+      countries: countries
     };
   },
   beforeDestroy() {
@@ -65,9 +76,9 @@ export default {
         email: this.email,
         city: this.city,
         address: this.address,
-      }
-    })
-  }
+      },
+    });
+  },
 };
 </script>
 
