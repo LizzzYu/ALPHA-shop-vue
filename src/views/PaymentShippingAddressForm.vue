@@ -43,14 +43,17 @@ export default {
     InputField,
     // SelectField,
   },
+  props: {
+    paymentFormData: Object
+  },
   data() {
     return {
-      salutation: '',
-      name: '',
-      phone: '',
-      email: '',
-      city: '',
-      address: '',
+      salutation: this.paymentFormData.salutation || '',
+      name: this.paymentFormData.name || '',
+      phone: this.paymentFormData.phone || '',
+      email: this.paymentFormData.email || '',
+      city: this.paymentFormData.city || '',
+      address: this.paymentFormData.address || '',
     };
   },
   beforeDestroy() {

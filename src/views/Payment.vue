@@ -8,6 +8,7 @@
       />
       <h3 class="title">{{ paymentSteps[currentStep - 1].title }}</h3>
       <router-view
+        :paymentFormData="paymentFormData"
         :isSubmitForm="isSubmitForm"
         @addShippingFee="addShippingFee"
         @handlePaymentFormSubmit="handlePaymentFormSubmit"
@@ -35,9 +36,12 @@
 
 <script>
 import { paymentStepperConfig } from '../configs/paymentConfigs';
+import { setStorage, getStorage } from '../utils/localStorage';
 import PaymentStepper from '../components/PaymentStepper';
 import PaymentActionButtonRow from '../components/PaymentActionButtonRow';
 import Modal from '../components/Modal';
+
+const STORAGE_KEY = 'payment-data'
 
 export default {
   name: 'Payment',
@@ -54,6 +58,9 @@ export default {
       type: Number,
       required: true,
     },
+  },
+  created() {
+    this.paymentFormData = getStorage(STORAGE_KEY)
   },
   data() {
     return {
@@ -105,6 +112,8 @@ export default {
         this.isModalShow = true;
         console.log('paymentFormData', this.paymentFormData);
       }
+
+      this.saveStorage()
     },
     handleSubmitForm(payload) {
       const { isSubmitForm } = payload;
@@ -115,6 +124,9 @@ export default {
       this.isModalShow = isModalShow;
       this.isFormFinished = false;
       this.isSubmitForm = false;
+    },
+    saveStorage() {
+      setStorage(STORAGE_KEY, this.paymentFormData)
     },
   },
   computed: {
@@ -131,6 +143,14 @@ export default {
       }
     },
   },
+  watch: {
+    paymentFormData: {
+      handler: function() {
+        this.saveStorage()
+      },
+      deep: true,
+    }
+  }
 };
 </script>
 

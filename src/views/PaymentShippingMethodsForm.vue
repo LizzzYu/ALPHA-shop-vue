@@ -34,11 +34,14 @@
 import { paymentShippingMethods } from '../configs/paymentConfigs';
 export default {
   name: 'PaymentShippingMethodsForm',
+  props: {
+    paymentFormData: Object,
+  },
   data() {
     return {
       paymentOptions: paymentShippingMethods,
-      shippingMethod: '標準運送',
-      shippingFee: 0,
+      shippingMethod: this.paymentFormData.shippingMethod || '標準運送',
+      shippingFee: this.paymentFormData.shippingFee || 0,
     };
   },
   methods: {
@@ -53,6 +56,7 @@ export default {
     this.$emit('handlePaymentFormSubmit', {
       paymentFormData: {
         shippingFee: this.shippingFee,
+        shippingMethod: this.shippingMethod
       },
     });
   },

@@ -39,13 +39,14 @@ export default {
       type: Boolean,
       required: true,
     },
+    paymentFormData: Object,
   },
   data() {
     return {
-      cardOwnerName: '',
-      cardNumber: '',
-      validityPeriod: '',
-      cvc_ccv: '',
+      cardOwnerName: this.paymentFormData.cardOwnerName || '',
+      cardNumber: this.paymentFormData.cardNumber || '',
+      validityPeriod: this.paymentFormData.validityPeriod || '',
+      cvc_ccv: this.paymentFormData.cvc_ccv || '',
     };
   },
   methods: {
