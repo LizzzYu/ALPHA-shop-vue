@@ -36,7 +36,7 @@ export default {
     };
   },
   created() {
-    this.paymentFormData = getStorage(STORAGE_KEY);
+    this.paymentFormData = getStorage(STORAGE_KEY) || {};
   },
   methods: {
     addShippingFee(payload) {
